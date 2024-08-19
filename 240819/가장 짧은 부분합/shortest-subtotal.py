@@ -7,6 +7,7 @@ ans = MX
 sum_val = 0
 en = 0
 for st in range(n):
+    # [st, en)
     while en < n and sum_val < s:
         sum_val += arr[en]
         en += 1
@@ -14,7 +15,7 @@ for st in range(n):
     if sum_val < s:
         break
 
-    ans = min(ans, en - st + 1)
+    ans = min(ans, en - st)
     sum_val -= arr[st]
 
 if ans == MX:
