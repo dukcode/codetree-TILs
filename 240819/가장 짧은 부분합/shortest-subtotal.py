@@ -7,12 +7,16 @@ ans = MX
 sum_val = 0
 en = 0
 for st in range(n):
-    while en < n and sum_val + arr[en] < s:
+    while en < n and sum_val < s:
         sum_val += arr[en]
         en += 1
 
-    ans = min(ans, en - st + 1)
+    if sum_val < s:
+        break
 
+    ans = min(ans, en - st + 1)
     sum_val -= arr[st]
 
+if ans == MX:
+    ans = -1
 print(ans)
