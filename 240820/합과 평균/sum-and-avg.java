@@ -9,7 +9,7 @@ public class Main {
         int b = sc.nextInt();
 
 
-        System.out.println(a + b);
-        System.out.println((double)(a + b) / 2);
+        System.out.print(a + b);
+        System.out.println(" " + (double)(a + b) / 2);
     }
 }
