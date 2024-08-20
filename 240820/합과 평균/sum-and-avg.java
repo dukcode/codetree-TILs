@@ -10,6 +10,6 @@ public class Main {
 
 
         System.out.println(a + b);
-        System.out.println((double)(a + b) / b);
+        System.out.println((double)(a + b) / 2);
     }
 }
