@@ -20,7 +20,7 @@ public class Main {
         }
 
         if ((a < c && c < b) || (b < c && c < a)) {
-            System.out.println(b);
+            System.out.println(c);
             return;
         }
 
