@@ -15,6 +15,10 @@ public class Main {
             for (int i = 0; i < n - y; ++i) {
                 System.out.print((char)(num + 'A') + " ");
                 num++;
+
+                if (num == 26) {
+                    num = 0;
+                }
             }
 
             System.out.println();
