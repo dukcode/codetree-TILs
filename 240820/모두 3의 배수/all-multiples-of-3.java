@@ -8,7 +8,7 @@ public class Main {
         for (int i = 0; i < 5; ++i) {
             int num = sc.nextInt();
 
-            if (num % 3 == 1) {
+            if (num % 3 != 0) {
                 flag = false;
                 break;
             }
