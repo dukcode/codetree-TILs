@@ -16,6 +16,10 @@ public class Main {
             minVal = c;
         }
 
+        if (a < minVal) {
+            minVal = a;
+        }
+
         if (minVal == a) {
             System.out.print(1 + " ");
         } else {
