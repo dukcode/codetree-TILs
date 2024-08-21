@@ -5,17 +5,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        Queue<Integer> evens = new ArrayDeque<>();
+        Stack<Integer> evens = new Stack<>();
         for (int i = 0; i < n; ++i) {
             int num = sc.nextInt();
 
             if (num % 2 == 0) {
-                evens.offer(num);
+                evens.push(num);
             }
         }
 
         while (!evens.isEmpty()) {
-            System.out.println(evens.poll());
+            System.out.println(evens.pop());
         }
     }
 }
