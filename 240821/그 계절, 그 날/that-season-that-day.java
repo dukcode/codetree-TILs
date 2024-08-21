@@ -2,6 +2,25 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final int[] DAYS = {
+        31, 28, 31,
+        30, 31, 30,
+        31, 31, 30,
+        31, 30, 31
+    };
+
+    private static boolean exists(int y, int m, int d) {
+        if(isLeapYear(y) && m == 2 && d >= 29) {
+            return false;
+        }
+
+        if (DAYS[m - 1] < d) {
+            return false;
+        }
+
+        return true;
+    }
+
     private static boolean isLeapYear(int y) {
         if (y % 4 == 0) {
             if (y % 100 == 0) {
@@ -24,7 +43,7 @@ public class Main {
         int m = sc.nextInt();
         int d = sc.nextInt();
 
-        if (!isLeapYear(y) && m == 2 && d == 29) {
+        if (!exists(y, m, d)) {
             System.out.println(-1);
         } else {
             if (3 <= m && m < 6) {
