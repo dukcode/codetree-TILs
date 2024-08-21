@@ -50,7 +50,7 @@ public class Main {
                 System.out.println("Spring");
             } else if (6 <= m && m < 9) {
                 System.out.println("Summer");
-            } else if (9 <= m && m < 11) {
+            } else if (9 <= m && m < 12) {
                 System.out.println("Fall");
             } else {
                 System.out.println("Winter");
