@@ -10,8 +10,8 @@ public class Main {
     };
 
     private static boolean exists(int y, int m, int d) {
-        if(isLeapYear(y) && m == 2 && d >= 29) {
-            return false;
+        if(isLeapYear(y) && m == 2 && d == 29) {
+            return true;
         }
 
         if (DAYS[m - 1] < d) {
