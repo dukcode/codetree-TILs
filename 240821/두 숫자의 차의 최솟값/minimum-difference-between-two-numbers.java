@@ -14,8 +14,6 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        Arrays.sort(arr);
-
         int minDiff = MX;
         for (int i = 1; i < n; ++i) {
             minDiff = Math.min(minDiff, arr[i] - arr[i - 1]);
