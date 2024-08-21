@@ -4,17 +4,7 @@ public class Main {
 
     private static int[] arr;
 
-    private static int lcm(int st, int en) {
-        if (st == en) {
-            return arr[st];
-        }
-        
-        int a = arr[st];
-        int b = lcm(st + 1, en);
-
-        int first = a;
-        int second = b;
-
+    private static int gcd(int a, int b) {
         if (a < b) {
             int tmp = a;
             a = b;
@@ -27,7 +17,20 @@ public class Main {
             b = r;
         }
 
-        return first * (second / a);
+        return a;
+    }
+
+    private static int lcm(int st, int en) {
+        if (st == en) {
+            return arr[st];
+        }
+        
+        int a = arr[st];
+        int b = lcm(st + 1, en);
+
+        int gcd = gcd(a, b);
+
+        return a * (b / gcd);
     }
 
     public static void main(String[] args) {
