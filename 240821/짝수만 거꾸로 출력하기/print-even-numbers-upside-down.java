@@ -15,7 +15,7 @@ public class Main {
         }
 
         while (!evens.isEmpty()) {
-            System.out.println(evens.pop());
+            System.out.print(evens.pop() + " ");
         }
     }
 }
