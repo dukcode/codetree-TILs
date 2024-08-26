@@ -11,7 +11,7 @@ public class Main {
     int n = sc.nextInt();
 
     PriorityQueue<Student> students = new PriorityQueue<>(
-        (a, b) -> a.h == b.h ? a.w - b.w : a.h - b.h);
+        (a, b) -> a.h == b.h ? b.w - a.w : a.h - b.h);
     List<Student> ans = new ArrayList<>();
     for (int i = 0; i < n; i++) {
       int h = sc.nextInt();
