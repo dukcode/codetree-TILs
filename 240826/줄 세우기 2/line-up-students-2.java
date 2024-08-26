@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -12,37 +10,31 @@ public class Main {
 
     PriorityQueue<Student> students = new PriorityQueue<>(
         (a, b) -> a.h == b.h ? b.w - a.w : a.h - b.h);
-    List<Student> ans = new ArrayList<>();
     for (int i = 0; i < n; i++) {
       int h = sc.nextInt();
       int w = sc.nextInt();
+      int idx = i + 1;
 
-      Student student = new Student(h, w);
-      ans.add(student);
+      Student student = new Student(h, w, idx);
       students.add(student);
     }
 
-    for (int i = 1; i <= n; i++) {
-      students.poll().setIdx(i);
+    while (!students.isEmpty()) {
+      System.out.println(students.poll());
     }
 
-    for (int i = 0; i < n; ++i) {
-      System.out.println(ans.get(i));
-    }
   }
 
   private static class Student {
 
-    private int h;
-    private int w;
-    private int idx;
+    final int h;
+    final int w;
 
-    public Student(int h, int w) {
+    private final int idx;
+
+    public Student(int h, int w, int idx) {
       this.h = h;
       this.w = w;
-    }
-
-    public void setIdx(int idx) {
       this.idx = idx;
     }
 
