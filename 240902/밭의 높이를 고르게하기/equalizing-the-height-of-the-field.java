@@ -28,7 +28,7 @@ public class Main {
     }
 
     int minCost = MX;
-    for (int st = 0; st < n - t; ++st) {
+    for (int st = 0; st <= n - t; ++st) {
       minCost = Math.min(minCost, psum[st + t] - psum[st]);
     }
 
