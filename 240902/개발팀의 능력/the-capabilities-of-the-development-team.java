@@ -52,14 +52,13 @@ public class Main {
   }
 
   private static int getMinDiff(List<Integer> picked) {
-    if (arr[picked.get(0)] == arr[picked.get(1)] ||
-        arr[picked.get(2)] == arr[picked.get(3)]) {
-      return MX;
-    }
-
     int a = arr[picked.get(0)] + arr[picked.get(1)];
     int b = arr[picked.get(2)] + arr[picked.get(3)];
     int c = arr[picked.get(4)];
+
+    if (a == b || b == c || c == a) {
+      return MX;
+    }
 
     int ret = Math.abs(a - b);
     ret = Math.max(ret, Math.abs(b - c));
