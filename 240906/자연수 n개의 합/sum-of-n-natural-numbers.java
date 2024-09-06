@@ -6,7 +6,7 @@ import java.io.OutputStreamWriter;
 
 public class Main {
 
-  private static final long MX = 1_000_000_000;
+  private static final long MX = 2_000_000_000;
 
   private static BufferedReader br;
   private static BufferedWriter bw;
