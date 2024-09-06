@@ -26,14 +26,14 @@ public class Main {
     b = Long.parseLong(st.nextToken());
 
     int cnt = 0;
-    long s = 1;
-    long e = m;
+    long l = 1;
+    long r = m;
     boolean firstEnd = false;
 
     int first = 0;
-    while (s <= e) {
+    while (l <= r) {
       cnt++;
-      long half = (s + e) / 2;
+      long half = (l + r) / 2;
 
       if (a <= half && half <= b) {
         if (!firstEnd) {
@@ -41,17 +41,18 @@ public class Main {
           firstEnd = true;
         }
 
-        if (half - a < b - half) {
-          s = half + 1;
+        if (half - a <= b - half) { // 등호 붙어야 하는 이유 모름
+          l = half + 1;
         } else {
-          e = half - 1;
+          r = half - 1;
         }
+        continue;
       }
 
       if (half < a) {
-        s = half + 1;
+        l = half + 1;
       } else {
-        e = half - 1;
+        r = half - 1;
       }
 
     }
