@@ -25,41 +25,36 @@ public class Main {
     a = Long.parseLong(st.nextToken());
     b = Long.parseLong(st.nextToken());
 
-    int cnt = 0;
-    long l = 1;
-    long r = m;
-    boolean firstEnd = false;
+    int minCnt = Integer.MAX_VALUE;
+    int maxCnt = 0;
 
-    int first = 0;
-    while (l <= r) {
-      cnt++;
-      long half = (l + r) / 2;
+    for (long num = a; num <= b; ++num) {
+      int cnt = 0;
+      long l = 1;
+      long r = m;
 
-      if (a <= half && half <= b) {
-        if (!firstEnd) {
-          first = cnt;
-          firstEnd = true;
+      while (l <= r) {
+        cnt++;
+        long half = (l + r) / 2;
+
+        if (half == num) {
+          break;
         }
 
-        if (half - a <= b - half) { // 등호 붙어야 하는 이유 모름
+        if (half < num) {
           l = half + 1;
         } else {
           r = half - 1;
         }
-        continue;
       }
 
-      if (half < a) {
-        l = half + 1;
-      } else {
-        r = half - 1;
-      }
-
+      minCnt = Math.min(minCnt, cnt);
+      maxCnt = Math.max(maxCnt, cnt);
     }
 
-    bw.write(String.valueOf(first));
+    bw.write(String.valueOf(minCnt));
     bw.write(' ');
-    bw.write(String.valueOf(cnt));
+    bw.write(String.valueOf(maxCnt));
 
     br.close();
     bw.close();
