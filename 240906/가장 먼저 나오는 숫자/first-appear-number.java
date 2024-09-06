@@ -44,7 +44,7 @@ public class Main {
 
   private static int findFirstTargetIdx(int[] arr, int target) {
     int idx = lowerBound(arr, target);
-    return arr[idx] == target ? idx : -1;
+    return idx < arr.length && arr[idx] == target ? idx : -1;
   }
 
   private static int lowerBound(int[] arr, int target) {
