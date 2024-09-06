@@ -36,12 +36,13 @@ public class Main {
       long sum = sumTo(half);
       if (sum <= s) {
         l = half + 1;
+        ret = Math.max(ret, half);
       } else {
         r = half - 1;
       }
     }
 
-    return l - 1;
+    return ret;
   }
 
   private static long sumTo(long b) {
