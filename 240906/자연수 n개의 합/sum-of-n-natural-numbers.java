@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.StringTokenizer;
 
 public class Main {
 
@@ -11,7 +10,6 @@ public class Main {
 
   private static BufferedReader br;
   private static BufferedWriter bw;
-  private static StringTokenizer st;
 
   private static long s;
 
@@ -30,19 +28,17 @@ public class Main {
     long l = 1;
     long r = MX;
 
-    long ret = -1;
     while (l <= r) {
       long half = (l + r) / 2;
       long sum = sumTo(half);
       if (sum <= s) {
         l = half + 1;
-        ret = Math.max(ret, half);
       } else {
         r = half - 1;
       }
     }
 
-    return ret;
+    return l - 1;
   }
 
   private static long sumTo(long b) {
