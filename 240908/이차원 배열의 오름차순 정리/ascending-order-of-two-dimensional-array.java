@@ -6,6 +6,8 @@ import java.io.OutputStreamWriter;
 
 public class Main {
 
+  private static final int MX = 1_000_000_000;
+
   private static BufferedReader br;
   private static BufferedWriter bw;
   private static int n;
@@ -27,7 +29,7 @@ public class Main {
 
   private static int solve() {
     int st = 1;
-    int en = n * n;
+    int en = (int) Math.min(MX, (long) n * n);
 
     while (st <= en) {
       int half = (st + en) / 2;
