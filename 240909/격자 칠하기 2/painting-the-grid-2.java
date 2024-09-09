@@ -93,6 +93,9 @@ public class Main {
     for (int y = 0; y < n; ++y) {
       for (int x = 0; x < n; ++x) {
         ret = Math.max(ret, dfs(d, y, x));
+        if (ret >= target) {
+          return ret;
+        }
       }
     }
 
