@@ -22,6 +22,7 @@ public class Main {
   private static int minValue;
 
   private static int target;
+  private static boolean[][] discovered;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -55,7 +56,6 @@ public class Main {
   }
 
   private static int dfs(int d, int sy, int sx) {
-    boolean[][] discovered = new boolean[n][n];
     Stack<Point> stk = new Stack<>();
 
     discovered[sy][sx] = true;
@@ -91,9 +91,13 @@ public class Main {
   }
 
   private static int getMaxCnt(int d) {
+    discovered = new boolean[n][n];
     int ret = 0;
     for (int y = 0; y < n; ++y) {
       for (int x = 0; x < n; ++x) {
+        if (discovered[y][x]) {
+          continue;
+        }
         ret = Math.max(ret, dfs(d, y, x));
         if (ret >= target) {
           return ret;
