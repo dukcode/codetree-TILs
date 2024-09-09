@@ -18,6 +18,8 @@ public class Main {
 
   private static int n;
   private static int[][] board;
+  private static int maxValue;
+  private static int minValue;
 
   private static int target;
 
@@ -37,7 +39,7 @@ public class Main {
 
   private static int solve() {
     int minD = 0;
-    int maxD = MX;
+    int maxD = maxValue - minValue;
 
     while (minD <= maxD) {
       int halfD = (maxD + minD) / 2;
@@ -105,11 +107,15 @@ public class Main {
   private static void input() throws IOException {
     n = Integer.parseInt(br.readLine());
 
+    minValue = MX;
+    maxValue = MX;
     board = new int[n][n];
     for (int y = 0; y < n; ++y) {
       st = new StringTokenizer(br.readLine());
       for (int x = 0; x < n; ++x) {
         board[y][x] = Integer.parseInt(st.nextToken());
+        minValue = Math.min(board[y][x], minValue);
+        maxValue = Math.max(board[y][x], maxValue);
       }
     }
   }
