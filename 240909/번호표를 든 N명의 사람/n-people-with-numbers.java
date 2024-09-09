@@ -3,8 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -23,7 +21,6 @@ public class Main {
     bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     input();
-    init();
     int ans = solve();
     bw.write(String.valueOf(ans));
 
@@ -50,8 +47,13 @@ public class Main {
   }
 
   private static int getTime(int k) {
-    PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.nCopies(k, 0));
-    for (int i = n - 1; i >= 0; i--) {
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    for (int i = 0; i < n; i++) {
+      if (pq.size() < k) {
+        pq.offer(times[i]);
+        continue;
+      }
+
       pq.offer(pq.poll() + times[i]);
     }
 
@@ -59,11 +61,8 @@ public class Main {
     while (!pq.isEmpty()) {
       ret = pq.poll();
     }
+    
     return ret;
-  }
-
-  private static void init() {
-    Arrays.sort(times);
   }
 
   private static void input() throws IOException {
