@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -30,6 +31,8 @@ public class Main {
     for (int i = 0; i < n; i++) {
       points[i] = Integer.parseInt(br.readLine());
     }
+    
+    Arrays.sort(points);
 
     bw.write(String.valueOf(solve()));
 
