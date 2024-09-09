@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -30,7 +32,7 @@ public class Main {
   }
 
   private static int solve() {
-    int minK = 0;
+    int minK = 1;
     int maxK = n;
 
     while (minK <= maxK) {
@@ -48,12 +50,14 @@ public class Main {
   }
 
   private static int getTime(int k) {
-    int sumTime = 0;
-    for (int i = 0; i < n; ++i) {
-      sumTime += times[i];
+    PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.nCopies(k, 0));
+    for (int i = n - 1; i >= 0; --i) {
+      pq.offer(pq.poll() + times[i]);
     }
 
-    return sumTime / k + sumTime % k;
+    return pq.stream()
+        .max(Integer::compareTo)
+        .orElse(-1);
   }
 
   private static void init() {
