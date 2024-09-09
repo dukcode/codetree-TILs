@@ -51,13 +51,15 @@ public class Main {
 
   private static int getTime(int k) {
     PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.nCopies(k, 0));
-    for (int i = n - 1; i >= 0; --i) {
+    for (int i = n - 1; i >= 0; i--) {
       pq.offer(pq.poll() + times[i]);
     }
 
-    return pq.stream()
-        .max(Integer::compareTo)
-        .orElse(-1);
+    int ret = 0;
+    while (!pq.isEmpty()) {
+      ret = pq.poll();
+    }
+    return ret;
   }
 
   private static void init() {
