@@ -39,7 +39,7 @@ public class Main {
     int minD = 0;
     int maxD = MX;
 
-    while (minD < maxD) {
+    while (minD <= maxD) {
       int halfD = (maxD + minD) / 2;
 
       if (getMaxCnt(halfD) < target) {
@@ -53,16 +53,15 @@ public class Main {
   }
 
   private static int dfs(int d, int sy, int sx) {
-    boolean[][] vis = new boolean[n][n];
+    boolean[][] discovered = new boolean[n][n];
     Stack<Point> stk = new Stack<>();
 
+    discovered[sy][sx] = true;
     stk.push(new Point(sy, sx));
 
-    int cnt = 0;
+    int cnt = 1;
     while (!stk.isEmpty()) {
       Point cur = stk.pop();
-      vis[cur.y][cur.x] = true;
-      cnt++;
 
       for (int dir = 0; dir < 4; ++dir) {
         int ny = cur.y + DELTA_Y[dir];
@@ -72,7 +71,7 @@ public class Main {
           continue;
         }
 
-        if (vis[ny][nx]) {
+        if (discovered[ny][nx]) {
           continue;
         }
 
@@ -80,6 +79,8 @@ public class Main {
           continue;
         }
 
+        discovered[ny][nx] = true;
+        cnt++;
         stk.push(new Point(ny, nx));
       }
     }
