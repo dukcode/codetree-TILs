@@ -55,8 +55,7 @@ public class Main {
   }
 
   private static int cntBombs(int r) {
-    int pos = r;
-
+    int pos = points[0] + r;
     int ret = 1;
     for (int p : points) {
       if (pos - r <= p && p <= pos + r) {
