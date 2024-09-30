@@ -60,7 +60,7 @@ public class Main {
   private static int getPositiveArea(int sy, int sx, int ey, int ex) {
     for (int y = sy; y <= ey; ++y) {
       for (int x = sx; x <= ex; ++x) {
-        if (board[y][x] < 0) {
+        if (board[y][x] <= 0) {
           return -1;
         }
       }
