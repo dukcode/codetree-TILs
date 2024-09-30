@@ -50,7 +50,7 @@ public class Main {
   private static int getMaxPositiveArea(int sy, int sx) {
     int ret = -1;
     for (int ey = sy; ey < h; ++ey) {
-      for (int ex = 0; ex < w; ++ex) {
+      for (int ex = sx; ex < w; ++ex) {
         ret = Math.max(ret, getPositiveArea(sy, sx, ey, ex));
       }
     }
