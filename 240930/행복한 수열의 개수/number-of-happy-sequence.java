@@ -62,18 +62,22 @@ public class Main {
 
   private static boolean isHappy(int[] arr) {
     int pivot = arr[0];
-    int max = 0;
+    int maxCnt = 0;
+    int cnt = 0;
     for (int i = 0; i < n; ++i) {
       if (pivot == arr[i]) {
-        max++;
+        cnt++;
         continue;
       }
 
-      max = 1;
+      maxCnt = Math.max(maxCnt, cnt);
+      cnt = 1;
       pivot = arr[i];
     }
 
-    return max >= m;
+    maxCnt = Math.max(maxCnt, cnt);
+
+    return maxCnt >= m;
   }
 
 
