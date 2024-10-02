@@ -39,10 +39,18 @@ public class Main {
       drop();
     }
 
+    boom();
+
     bw.write(String.valueOf(cntBomb()));
 
     br.close();
     bw.close();
+  }
+
+  private static void fillZeros(int end, int x) {
+    for (int i = end; i >= 0; --i) {
+      board[i][x] = 0;
+    }
   }
 
   private static int cntBomb() {
@@ -89,25 +97,21 @@ public class Main {
       }
     }
 
-    for (int i = pos; i >= 0; --i) {
-      board[i][x] = 0;
-    }
+    fillZeros(pos, x);
   }
 
   private static void drop() {
     for (int x = 0; x < n; ++x) {
-      int en = n - 1;
+      int pos = n - 1;
       for (int y = n - 1; y >= 0; --y) {
         if (board[y][x] == 0) {
           continue;
         }
 
-        board[en--][x] = board[y][x];
+        board[pos--][x] = board[y][x];
       }
 
-      for (int i = en; i >= 0; --i) {
-        board[i][x] = 0;
-      }
+      fillZeros(pos, x);
     }
   }
 
