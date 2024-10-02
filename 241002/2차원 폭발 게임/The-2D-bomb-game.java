@@ -33,24 +33,17 @@ public class Main {
       }
     }
 
+    boom();
     for (int i = 0; i < k; ++i) {
-      boom();
       rotate();
       drop();
+      boom();
     }
-
-    boom();
 
     bw.write(String.valueOf(cntBomb()));
 
     br.close();
     bw.close();
-  }
-
-  private static void fillZeros(int end, int x) {
-    for (int i = end; i >= 0; --i) {
-      board[i][x] = 0;
-    }
   }
 
   private static int cntBomb() {
@@ -66,16 +59,25 @@ public class Main {
 
   private static void boom() {
     for (int x = 0; x < n; ++x) {
-      boomCol(x);
+      while (true) {
+        if (!boomCol(x)) {
+          break;
+        }
+      }
     }
 
   }
 
-  private static void boomCol(int x) {
-    int pivot = board[0][x];
+  private static boolean boomCol(int x) {
+    boolean boomed = false;
+    int pivot = board[n - 1][x];
     int pos = n - 1;
     int cnt = 0;
     for (int y = n - 1; y >= 0; --y) {
+      if (board[y][x] == 0) {
+        break;
+      }
+
       if (board[y][x] == pivot) {
         cnt++;
         continue;
@@ -85,6 +87,8 @@ public class Main {
         for (int i = 0; i < cnt; ++i) {
           board[pos--][x] = pivot;
         }
+      } else {
+        boomed = true;
       }
 
       pivot = board[y][x];
@@ -95,23 +99,31 @@ public class Main {
       for (int i = 0; i < cnt; ++i) {
         board[pos--][x] = pivot;
       }
+    } else {
+      boomed = true;
     }
 
-    fillZeros(pos, x);
+    while (pos >= 0) {
+      board[pos--][x] = 0;
+    }
+
+    return boomed;
   }
 
   private static void drop() {
     for (int x = 0; x < n; ++x) {
-      int pos = n - 1;
+      int en = n - 1;
       for (int y = n - 1; y >= 0; --y) {
         if (board[y][x] == 0) {
           continue;
         }
 
-        board[pos--][x] = board[y][x];
+        board[en--][x] = board[y][x];
       }
 
-      fillZeros(pos, x);
+      for (int i = en; i >= 0; --i) {
+        board[i][x] = 0;
+      }
     }
   }
 
@@ -137,6 +149,5 @@ public class Main {
       }
     }
   }
-
 
 }
