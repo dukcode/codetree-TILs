@@ -57,6 +57,9 @@ public class Main {
 
     int ret = 0;
     for (int piece = 0; piece < k; piece++) {
+      if (pieces[piece] >= m) {
+        continue;
+      }
       pieces[piece] += moves[idx];
       ret = Math.max(ret, solve(idx + 1));
       pieces[piece] -= moves[idx];
