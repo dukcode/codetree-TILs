@@ -18,8 +18,7 @@ public class Main {
     bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     expression = br.readLine().toCharArray();
-    cntNums = cntNums();
-    nums = new int[cntNums];
+    nums = new int[6];
     bw.write(String.valueOf(solve(0)));
 
     br.close();
@@ -27,21 +26,8 @@ public class Main {
 
   }
 
-  private static int cntNums() {
-    int ret = -1;
-    for (char token : expression) {
-      if (!Character.isAlphabetic(token)) {
-        continue;
-      }
-
-      ret = Math.max(ret, token - 'a' + 1);
-    }
-
-    return ret;
-  }
-
   private static int solve(int idx) {
-    if (idx == cntNums) {
+    if (idx == 6) {
       return calculate();
     }
 
@@ -58,22 +44,22 @@ public class Main {
     int res = 0;
     char op = '+';
     for (char token : expression) {
-      if (Character.isAlphabetic(token)) {
-        switch (op) {
-          case '+':
-            res += nums[token - 'a'];
-            break;
-          case '*':
-            res *= nums[token - 'a'];
-            break;
-          case '-':
-            res -= nums[token - 'a'];
-            break;
-        }
+      if (!Character.isAlphabetic(token)) {
+        op = token;
         continue;
       }
 
-      op = token;
+      switch (op) {
+        case '+':
+          res += nums[token - 'a'];
+          break;
+        case '*':
+          res *= nums[token - 'a'];
+          break;
+        case '-':
+          res -= nums[token - 'a'];
+          break;
+      }
     }
 
     return res;
