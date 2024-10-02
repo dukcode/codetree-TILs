@@ -47,23 +47,25 @@ public class Main {
     if (idx == n) {
       int score = 0;
       for (int pos : pieces) {
-        if (pos >= m) {
-          score++;
-        }
+        score += pos >= m ? 1 : 0;
       }
 
       return score;
     }
 
     int ret = 0;
+    int cntEnd = 0;
     for (int piece = 0; piece < k; piece++) {
       if (pieces[piece] >= m) {
+        cntEnd++;
         continue;
       }
       pieces[piece] += moves[idx];
       ret = Math.max(ret, solve(idx + 1));
       pieces[piece] -= moves[idx];
     }
+
+    ret = Math.max(ret, cntEnd);
 
     return ret;
   }
