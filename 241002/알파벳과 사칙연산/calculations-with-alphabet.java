@@ -10,7 +10,6 @@ public class Main {
   private static BufferedWriter bw;
 
   private static char[] expression;
-  private static int cntNums;
   private static int[] nums;
 
   public static void main(String[] args) throws IOException {
@@ -26,12 +25,12 @@ public class Main {
 
   }
 
-  private static int solve(int idx) {
+  private static long solve(int idx) {
     if (idx == 6) {
       return calculate();
     }
 
-    int ret = 0;
+    long ret = Long.MIN_VALUE;
     for (int i = 1; i <= 4; ++i) {
       nums[idx] = i;
       ret = Math.max(ret, solve(idx + 1));
@@ -40,8 +39,8 @@ public class Main {
     return ret;
   }
 
-  private static int calculate() {
-    int res = 0;
+  private static long calculate() {
+    long res = 0;
     char op = '+';
     for (char token : expression) {
       if (!Character.isAlphabetic(token)) {
