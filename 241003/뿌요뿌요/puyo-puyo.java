@@ -53,12 +53,12 @@ public class Main {
         }
 
         int cnt = dfs(y, x);
+        maxBlocks = Math.max(maxBlocks, cnt);
         if (cnt < 4) {
           continue;
         }
 
         cntBoom++;
-        maxBlocks = Math.max(maxBlocks, cnt);
       }
     }
 
