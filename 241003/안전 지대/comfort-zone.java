@@ -61,7 +61,7 @@ public class Main {
         ansK = k;
       }
     }
-    return new int[]{cnt, ansK};
+    return new int[]{ansK, cnt};
   }
 
 
