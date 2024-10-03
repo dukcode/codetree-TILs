@@ -42,7 +42,7 @@ public class Main {
 
   private static int solve(int here, int sumDist, int cnt) {
     if (cnt == n) {
-      return sumDist + dist[here][0];
+      return sumDist + (dist[here][0] == 0 ? MX : dist[here][0]);
     }
 
     int ret = MX;
