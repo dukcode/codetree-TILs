@@ -47,7 +47,7 @@ public class Main {
 
     int ret = MX;
     for (int there = 0; there < n; there++) {
-      if (vis[there]) {
+      if (vis[there] || dist[here][there] == 0) {
         continue;
       }
 
