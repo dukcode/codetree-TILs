@@ -31,7 +31,7 @@ public class Main {
     }
 
     ans = MX;
-    solve(n - 1, 1);
+    solve(n - 1, 0);
 
     bw.write(String.valueOf(ans == MX ? -1 : ans));
 
