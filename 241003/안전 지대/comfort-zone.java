@@ -51,8 +51,8 @@ public class Main {
   }
 
   private static int[] solve() {
-    int cnt = 1;
-    int ansK = 0;
+    int cnt = 0;
+    int ansK = 1;
     for (int k = 1; k <= maxK; k++) {
       int cntZone = cntComportZone(k);
       if (cnt < cntZone) {
