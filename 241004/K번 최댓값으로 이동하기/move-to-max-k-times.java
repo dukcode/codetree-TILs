@@ -48,15 +48,12 @@ public class Main {
   }
 
   private static boolean move(Point now) {
-    int maxValue = 0;
-
     int pivot = board[now.y][now.x];
 
     boolean[][] discovered = new boolean[n][n];
     Queue<Point> q = new ArrayDeque<>();
 
     q.offer(now);
-    discovered[now.y][now.x] = true;
 
     boolean canMove = false;
     while (!q.isEmpty()) {
@@ -74,19 +71,32 @@ public class Main {
         }
 
         canMove = true;
-        if (board[ny][nx] > maxValue) {
-          maxValue = board[ny][nx];
-          now.y = ny;
-          now.x = nx;
-        }
-
         q.offer(new Point(ny, nx));
         discovered[ny][nx] = true;
 
       }
     }
 
-    return canMove;
+    if (!canMove) {
+      return false;
+    }
+
+    int maxVal = 0;
+    for (int y = 0; y < n; y++) {
+      for (int x = 0; x < n; x++) {
+        if (!discovered[y][x]) {
+          continue;
+        }
+
+        if (board[y][x] > maxVal) {
+          maxVal = board[y][x];
+          now.y = y;
+          now.x = x;
+        }
+      }
+    }
+
+    return true;
   }
 
 
