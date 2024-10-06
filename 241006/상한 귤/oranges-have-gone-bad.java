@@ -42,7 +42,9 @@ public class Main {
     int[][] ans = solve();
     for (int y = 0; y < n; y++) {
       for (int x = 0; x < n; x++) {
-        bw.write(String.valueOf(ans[y][x]));
+        bw.write(String.valueOf(
+            ans[y][x] == -1 && board[y][x] == 1 ? -2 : ans[y][x]
+        ));
         bw.write(' ');
       }
       bw.newLine();
