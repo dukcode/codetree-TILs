@@ -53,7 +53,7 @@ public class Main {
     for (int k = 1; k <= MX_NUM; k++) {
       for (int y = 0; y < n; y++) {
         for (int x = 0; x < n; x++) {
-          if (y == 0 && x == 0 && k == board[y][x]) {
+          if (k == board[0][0] && y == 0 && x == 0) {
             continue;
           }
           int minValue = Math.min(k, board[y][x]);
