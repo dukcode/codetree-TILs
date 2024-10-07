@@ -50,9 +50,9 @@ public class Main {
 
   public static int solve() {
     cache[board[0][0]][0][0] = board[0][0];
-    for (int k = 1; k <= MX_NUM; k++) {
-      for (int y = 0; y < n; y++) {
-        for (int x = 0; x < n; x++) {
+    for (int y = 0; y < n; y++) {
+      for (int x = 0; x < n; x++) {
+        for (int k = 1; k <= MX_NUM; k++) {
           if (k == board[0][0] && y == 0 && x == 0) {
             continue;
           }
