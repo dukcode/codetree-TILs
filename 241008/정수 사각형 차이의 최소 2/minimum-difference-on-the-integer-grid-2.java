@@ -49,17 +49,19 @@ public class Main {
   }
 
   public static int solve() {
-
+    cache[board[0][0]][0][0] = board[0][0];
     for (int k = 1; k <= MX_NUM; k++) {
       for (int y = 0; y < n; y++) {
         for (int x = 0; x < n; x++) {
+          if (y == 0 && x == 0 && k == board[y][x]) {
+            continue;
+          }
           int minValue = Math.min(k, board[y][x]);
 
           int upperMaxValue = inRange(y - 1, x) ? cache[k][y - 1][x] : MX;
           int leftMaxValue = inRange(y, x - 1) ? cache[k][y][x - 1] : MX;
 
           int selectedMaxValue = Math.min(leftMaxValue, upperMaxValue);
-          selectedMaxValue = selectedMaxValue == MX && k == board[y][x] ? k : selectedMaxValue;
 
           int maxValue = Math.max(selectedMaxValue, board[y][x]);
 
