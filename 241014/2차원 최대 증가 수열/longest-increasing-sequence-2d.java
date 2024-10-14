@@ -36,14 +36,14 @@ public class Main {
       Arrays.fill(cache[y], -1);
     }
 
-    bw.write(String.valueOf(solve(h - 1, w - 1)));
+    bw.write(String.valueOf(solve(0, 0)));
 
     br.close();
     bw.close();
   }
 
   private static int solve(int r, int c) {
-    if (r == 0 && c == 0) {
+    if (r == h - 1 && c == w - 1) {
       return 1;
     }
 
@@ -52,9 +52,9 @@ public class Main {
     }
 
     int ret = 1;
-    for (int y = 0; y < r; ++y) {
-      for (int x = 0; x < c; ++x) {
-        if (board[y][x] >= board[r][c]) {
+    for (int y = r + 1; y < h; ++y) {
+      for (int x = c + 1; x < w; ++x) {
+        if (board[r][c] >= board[y][x]) {
           continue;
         }
 
