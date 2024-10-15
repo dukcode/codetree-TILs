@@ -82,7 +82,7 @@ public class Main {
         continue;
       }
 
-      ret = Math.max(ret, solveDec(i) + 1);
+      ret = Math.max(ret, solveInc(i) + 1);
     }
 
     return incCache[idx] = ret;
