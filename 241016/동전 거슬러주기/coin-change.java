@@ -37,11 +37,16 @@ public class Main {
     cache = new int[m + 1];
     Arrays.fill(cache, MX);
 
-    bw.write(String.valueOf(solve(m)));
+    bw.write(String.valueOf(solve()));
 
     br.close();
     bw.close();
 
+  }
+
+  private static int solve() {
+    int ret = solve(m);
+    return ret == MX ? -1 : ret;
   }
 
   private static int solve(int target) {
