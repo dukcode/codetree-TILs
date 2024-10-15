@@ -35,7 +35,7 @@ public class Main {
     }
 
     cache = new int[m + 1];
-    Arrays.fill(cache, MX);
+    Arrays.fill(cache, Integer.MAX_VALUE);
 
     bw.write(String.valueOf(solve()));
 
@@ -45,16 +45,16 @@ public class Main {
   }
 
   private static int solve() {
-    int ret = solve(m);
+    int ret = getMinCnt(m);
     return ret == MX ? -1 : ret;
   }
 
-  private static int solve(int target) {
+  private static int getMinCnt(int target) {
     if (target == 0) {
       return cache[target] = 0;
     }
 
-    if (cache[target] != MX) {
+    if (cache[target] != Integer.MAX_VALUE) {
       return cache[target];
     }
 
@@ -64,7 +64,7 @@ public class Main {
         continue;
       }
 
-      ret = Math.min(ret, solve(target - coin) + 1);
+      ret = Math.min(ret, getMinCnt(target - coin) + 1);
     }
 
     return cache[target] = ret;
