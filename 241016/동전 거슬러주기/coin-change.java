@@ -37,7 +37,18 @@ public class Main {
     cache = new int[m + 1];
     Arrays.fill(cache, MX);
 
-    bw.write(String.valueOf(solve()));
+    cache[0] = 0;
+    for (int i = 1; i <= m; ++i) {
+      for (int coin : coins) {
+        if (i - coin < 0) {
+          continue;
+        }
+
+        cache[i] = Math.min(cache[i], cache[i - coin] + 1);
+      }
+    }
+
+    bw.write(String.valueOf(cache[m] == MX ? -1 : cache[m]));
 
     br.close();
     bw.close();
