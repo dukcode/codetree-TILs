@@ -1,69 +1,73 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static final int MAX_N = 100;
-    public static final int MAX_M = 10000;
-    public static final int MAX_ANS = 10001;
-    public static final int UNUSED = -1;
 
-    public static int n, m;
+  private static final int MX = 987_654_321;
 
-    public static int[] coin = new int[MAX_N + 1];
-    public static int[] memo = new int[MAX_M + 1];
+  private static BufferedReader br;
+  private static BufferedWriter bw;
+  private static StringTokenizer st;
 
-    public static void initializeMemo() {
-        for(int i = 0; i <= m; i++)
-            memo[i] = UNUSED;
+  private static int n;
+  private static int m;
+  private static int[] coins;
+
+  private static int[] cache;
+
+  public static void main(String[] args) throws IOException {
+    br = new BufferedReader(new InputStreamReader(System.in));
+    bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    st = new StringTokenizer(br.readLine());
+    n = Integer.parseInt(st.nextToken());
+    m = Integer.parseInt(st.nextToken());
+
+    coins = new int[n];
+    st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < n; i++) {
+      coins[i] = Integer.parseInt(st.nextToken());
     }
 
-    // sum에서부터 시작하여
-    // 최종적으로 합 m을 만드는 데
-    // 필요한 최소 동전의 수를
-    // 반환하는 재귀입니다.
-    public static int findMinCnt(int sum) {
-        // 미리 계산된 적이 있는 경우 해당 값을 사용해줍니다.
-        if(memo[sum] != UNUSED)
-            return memo[sum];
+    cache = new int[m + 1];
+    Arrays.fill(cache, MX);
 
-        // 합이 m이 되면 동전이 추가적으로 필요 없으므로
-        // 필요한 동전의 수 0을 반환 합니다.
-        if(sum == m) {
-            return memo[sum] = 0;
-        }
+    bw.write(String.valueOf(solve()));
 
-        // 최소를 구하는 문제이므로
-        // 초기값을 답이 될 수 있는 최대보다 조금 더 큰
-        // MAX_ANS로 설정합니다.
-        int minCnt = MAX_ANS;
+    br.close();
+    bw.close();
 
-        // 동전들을 하나씩 사용해봅니다.
-        for(int i = 1; i <= n; i++) {
-            if(sum + coin[i] <= m)
-                minCnt = Math.min(minCnt, findMinCnt(sum + coin[i]) + 1);
-        }
+  }
 
-        return memo[sum] = minCnt;
+  private static int solve() {
+    int ret = solve(m);
+    return ret == MX ? -1 : ret;
+  }
+
+  private static int solve(int target) {
+    if (target == 0) {
+      return cache[target] = 0;
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        n = sc.nextInt();
-        m = sc.nextInt();
-        for(int i = 1; i <= n; i++)
-            coin[i] = sc.nextInt();
-
-        initializeMemo();
-
-        // 합 0에서부터 시작하여
-        // 합 m을 만들기 위해 필요한
-        // 최소 동전의 수를 계산합니다.
-        int minCnt = findMinCnt(0);
-
-        // 거슬러주는것이 불가능 할 시, -1을 출력합니다.
-        if(minCnt == MAX_ANS)
-            minCnt = -1;
-
-        System.out.println(minCnt);
+    if (cache[target] != MX) {
+      return cache[target];
     }
+
+    int ret = MX;
+    for (int coin : coins) {
+      if (target - coin < 0) {
+        continue;
+      }
+
+      ret = Math.min(ret, solve(target - coin) + 1);
+    }
+
+    return cache[target] = ret;
+  }
+
 }
