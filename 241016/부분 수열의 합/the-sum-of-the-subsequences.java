@@ -3,10 +3,12 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
 
+  private static final int INITIAL = -1;
   private static final int FALSE = 0;
   private static final int TRUE = 1;
 
@@ -35,6 +37,9 @@ public class Main {
     }
 
     cache = new int[m + 1][n];
+    for (int y = 0; y <= m; y++) {
+      Arrays.fill(cache[y], INITIAL);
+    }
 
     bw.write(solve());
 
@@ -55,9 +60,14 @@ public class Main {
       return FALSE;
     }
 
-    int ret = solve(sum - arr[idx], idx + 1) | solve(sum, idx + 1);
+    if (cache[sum][idx] != INITIAL) {
+      return cache[sum][idx];
+    }
 
-    return cache[sum][idx] = ret;
+    int used = solve(sum - arr[idx], idx + 1);
+    int notUsed = solve(sum, idx + 1);
+
+    return cache[sum][idx] = used | notUsed;
   }
 
 }
