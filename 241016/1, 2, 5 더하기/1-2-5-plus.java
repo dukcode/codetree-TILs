@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-  
+
   private static final int MOD = 10007;
 
   private static BufferedReader br;
@@ -27,22 +27,31 @@ public class Main {
     cache = new int[n + 1];
     Arrays.fill(cache, -1);
 
-    cache[0] = 1;
-    for (int num = 1; num <= n; num++) {
-      cache[num] = 0;
-      for (int add : new int[]{1, 2, 5}) {
-        if (num - add < 0) {
-          continue;
-        }
-
-        cache[num] = (cache[num] + cache[num - add]) % MOD;
-      }
-    }
-
-    bw.write(String.valueOf(cache[n]));
+    bw.write(String.valueOf(solve(n)));
 
     br.close();
     bw.close();
+  }
+
+  private static int solve(int n) {
+    if (n < 0) {
+      return 0;
+    }
+
+    if (n == 0) {
+      return 1;
+    }
+
+    if (cache[n] != -1) {
+      return cache[n];
+    }
+
+    int ret = 0;
+    for (int add : new int[]{1, 2, 5}) {
+      ret = (ret + solve(n - add)) % MOD;
+    }
+
+    return cache[n] = ret;
   }
 
 
