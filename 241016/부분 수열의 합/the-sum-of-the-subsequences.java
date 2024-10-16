@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -19,7 +18,7 @@ public class Main {
   private static int m;
   private static int[] arr;
 
-  private static int[] cache;
+  private static int[][] cache;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -35,27 +34,30 @@ public class Main {
       arr[i] = Integer.parseInt(st.nextToken());
     }
 
-    cache = new int[m + 1];
-    cache[0] = TRUE;
+    cache = new int[m + 1][n];
 
-    for (int num : arr) {
-      for (int sum = m; sum > 0; --sum) {
-        if (sum - num < 0) {
-          continue;
-        }
-
-        if (cache[sum - num] == FALSE) {
-          continue;
-        }
-
-        cache[sum] = TRUE;
-      }
-    }
-
-    bw.write(cache[m] == TRUE ? "Yes" : "No");
+    bw.write(solve());
 
     br.close();
     bw.close();
+  }
+
+  private static String solve() {
+    return solve(m, 0) == TRUE ? "Yes" : "No";
+  }
+
+  private static int solve(int sum, int idx) {
+    if (sum == 0) {
+      return TRUE;
+    }
+
+    if (sum < 0 || idx >= n) {
+      return FALSE;
+    }
+
+    int ret = solve(sum - arr[idx], idx + 1) | solve(sum, idx + 1);
+
+    return cache[sum][idx] = ret;
   }
 
 }
