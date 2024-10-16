@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -37,7 +38,6 @@ public class Main {
     cache = new int[m + 1];
     cache[0] = TRUE;
 
-    Loop:
     for (int num : arr) {
       for (int sum = m; sum > 0; --sum) {
         if (sum - num < 0) {
@@ -49,7 +49,6 @@ public class Main {
         }
 
         cache[sum] = TRUE;
-        continue Loop;
       }
     }
 
