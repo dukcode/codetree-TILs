@@ -38,34 +38,20 @@ public class Main {
     Arrays.fill(cache, MX);
 
     cache[0] = 0;
-    bw.write(String.valueOf(solve()));
+    for (int i = 0; i < n; ++i) {
+      for (int sum = m; sum >= 0; --sum) {
+        if (sum - arr[i] < 0) {
+          continue;
+        }
+
+        cache[sum] = Math.min(cache[sum], cache[sum - arr[i]] + 1);
+      }
+    }
+
+    bw.write(String.valueOf(cache[m] == MX ? -1 : cache[m]));
 
     br.close();
     bw.close();
-  }
-
-  private static int solve() {
-    int ret = solve(m, 0);
-    return ret == MX ? -1 : ret;
-  }
-
-  private static int solve(int remaining, int idx) {
-    if (remaining == 0) {
-      return 0;
-    }
-
-    if (remaining < 0 || idx >= n) {
-      return MX;
-    }
-
-    if (cache[remaining] != MX) {
-      return cache[remaining];
-    }
-
-    int notUse = solve(remaining, idx + 1);
-    int use = solve(remaining - arr[idx], idx + 1) + 1;
-
-    return cache[remaining] = Math.min(notUse, use);
   }
 
 
