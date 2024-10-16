@@ -36,23 +36,38 @@ public class Main {
     Arrays.fill(cache, -1);
     cache[0] = 0;
 
-    for (int sum = 1; sum <= m; sum++) {
-      for (int coin : coins) {
-        if (sum - coin < 0) {
-          continue;
-        }
-
-        if (cache[sum - coin] == -1) {
-          continue;
-        }
-        cache[sum] = Math.max(cache[sum], cache[sum - coin] + 1);
-      }
-    }
-
-    bw.write(String.valueOf(cache[m]));
+    bw.write(String.valueOf(solve(m)));
 
     br.close();
     bw.close();
+  }
+
+  private static int solve(int sum) {
+    if (sum == 0) {
+      return 0;
+    }
+
+    if (cache[sum] != -1) {
+      return cache[sum];
+    }
+
+    int ret = -1;
+    for (int coin : coins) {
+      if (sum - coin < 0) {
+        continue;
+      }
+
+      int before = solve(sum - coin);
+
+      if (before == -1) {
+        continue;
+      }
+
+      ret = Math.max(ret, before + 1);
+
+    }
+
+    return cache[sum] = ret;
   }
 
 
