@@ -8,6 +8,9 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+  private static final int UNUSED = -1;
+  private static final int IMPOSSIBLE = -2;
+
   private static BufferedReader br;
   private static BufferedWriter bw;
   private static StringTokenizer st;
@@ -33,13 +36,18 @@ public class Main {
     }
 
     cache = new int[m + 1];
-    Arrays.fill(cache, -1);
+    Arrays.fill(cache, UNUSED);
     cache[0] = 0;
 
-    bw.write(String.valueOf(solve(m)));
+    bw.write(String.valueOf(solve()));
 
     br.close();
     bw.close();
+  }
+
+  private static int solve() {
+    int ret = solve(m);
+    return ret == IMPOSSIBLE ? -1 : ret;
   }
 
   private static int solve(int sum) {
@@ -47,11 +55,11 @@ public class Main {
       return 0;
     }
 
-    if (cache[sum] != -1) {
+    if (cache[sum] != UNUSED) {
       return cache[sum];
     }
 
-    int ret = -1;
+    int ret = IMPOSSIBLE;
     for (int coin : coins) {
       if (sum - coin < 0) {
         continue;
@@ -59,7 +67,7 @@ public class Main {
 
       int before = solve(sum - coin);
 
-      if (before == -1) {
+      if (before == IMPOSSIBLE) {
         continue;
       }
 
