@@ -56,7 +56,7 @@ public class Main {
       ret = Math.max(ret, solve(n - len) + rods[len]);
     }
 
-    return ret;
+    return cache[n] = ret;
   }
 
 
