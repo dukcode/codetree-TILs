@@ -35,36 +35,33 @@ public class Main {
       jewels[i] = new Jewel(weight, value);
     }
 
-    cache = new int[n + 1][maxWeight + 1];
+    cache = new int[n][maxWeight + 1];
 
-    for (int y = 0; y <= n; y++) {
+    for (int y = 0; y < n; y++) {
       Arrays.fill(cache[y], -1);
     }
 
-    cache[0][0] = 0;
-
-    for (int idx = 1; idx <= n; ++idx) {
-      for (int w = 0; w <= maxWeight; w++) {
-
-        cache[idx][w] = cache[idx - 1][w];
-
-        if (w - jewels[idx - 1].weight >= 0) {
-          cache[idx][w] = Math.max(cache[idx][w],
-              cache[idx - 1][w - jewels[idx - 1].weight] + jewels[idx - 1].value);
-        }
-
-      }
-    }
-
-    int ans = -1;
-    for (int w = 0; w <= maxWeight; w++) {
-      ans = Math.max(ans, cache[n][w]);
-    }
-
-    bw.write(String.valueOf(ans));
+    bw.write(String.valueOf(solve(n - 1, maxWeight)));
 
     br.close();
     bw.close();
+  }
+
+  private static int solve(int idx, int weight) {
+    if (idx < 0) {
+      return 0;
+    }
+
+    if (cache[idx][weight] != -1) {
+      return cache[idx][weight];
+    }
+
+    int ret = solve(idx - 1, weight);
+    if (weight - jewels[idx].weight >= 0) {
+      ret = Math.max(ret, solve(idx - 1, weight - jewels[idx].weight) + jewels[idx].value);
+    }
+
+    return cache[idx][weight] = ret;
   }
 
   private static class Jewel {
