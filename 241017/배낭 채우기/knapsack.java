@@ -17,7 +17,7 @@ public class Main {
 
   private static Jewel[] jewels;
 
-  private static int[][] cache;
+  private static int[] cache;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -35,33 +35,20 @@ public class Main {
       jewels[i] = new Jewel(weight, value);
     }
 
-    cache = new int[n][maxWeight + 1];
+    cache = new int[maxWeight + 1];
+    Arrays.fill(cache, -1);
+    cache[0] = 0;
 
-    for (int y = 0; y < n; y++) {
-      Arrays.fill(cache[y], -1);
+    for (Jewel jewel : jewels) {
+      for (int w = maxWeight; w >= jewel.weight; w--) {
+        cache[w] = Math.max(cache[w], cache[w - jewel.weight] + jewel.value);
+      }
     }
 
-    bw.write(String.valueOf(solve(n - 1, maxWeight)));
+    bw.write(String.valueOf(Arrays.stream(cache).max().getAsInt()));
 
     br.close();
     bw.close();
-  }
-
-  private static int solve(int idx, int weight) {
-    if (idx < 0) {
-      return 0;
-    }
-
-    if (cache[idx][weight] != -1) {
-      return cache[idx][weight];
-    }
-
-    int ret = solve(idx - 1, weight);
-    if (weight - jewels[idx].weight >= 0) {
-      ret = Math.max(ret, solve(idx - 1, weight - jewels[idx].weight) + jewels[idx].value);
-    }
-
-    return cache[idx][weight] = ret;
   }
 
   private static class Jewel {
