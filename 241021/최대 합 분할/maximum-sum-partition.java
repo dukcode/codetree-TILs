@@ -8,8 +8,7 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-  private static final int UNUSED = -1;
-  private static final int IMPOSSIBLE = -2;
+  private static final int MN = -987_654_321;
 
   private static BufferedReader br;
   private static BufferedWriter bw;
@@ -20,7 +19,7 @@ public class Main {
 
   private static int total;
 
-  private static int[][][] cache;
+  private static int[][] cache; // cache[idx][sumA - sumB]
 
 
   public static void main(String[] args) throws IOException {
@@ -28,45 +27,47 @@ public class Main {
     bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     n = Integer.parseInt(br.readLine());
-    arr = new int[n];
+    arr = new int[n + 1];
     st = new StringTokenizer(br.readLine());
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
       arr[i] = Integer.parseInt(st.nextToken());
       total += arr[i];
     }
 
-    cache = new int[total + 1][total + 1][n];
-    for (int a = 0; a <= total; a++) {
-      for (int b = 0; b <= total; b++) {
-        Arrays.fill(cache[a][b], UNUSED);
-      }
+    cache = new int[n + 1][2 * total + 1];
+    for (int y = 0; y <= n; y++) {
+      Arrays.fill(cache[y], MN);
+    }
+    cache[0][total] = 0;
 
+    for (int idx = 1; idx <= n; ++idx) {
+      int num = arr[idx];
+      for (int diff = -total; diff <= total; diff++) {
+        update(idx, diff, diff - num, num);
+        update(idx, diff, diff + num, 0);
+        update(idx, diff, diff, 0);
+      }
     }
 
-    bw.write(String.valueOf(solve()));
+    bw.write(String.valueOf(cache[n][total]));
 
     br.close();
     bw.close();
   }
 
-  private static int solve() {
-    return solve(0, 0, 0);
-  }
-
-  private static int solve(int idx, int sumA, int sumB) {
-    if (idx == n) {
-      return sumA == sumB ? sumA : IMPOSSIBLE;
+  private static void update(int idx, int diff, int diffBefore, int num) {
+    if (diffBefore < -total || diffBefore > total) {
+      return;
     }
 
-    if (cache[sumA][sumB][idx] != UNUSED) {
-      return cache[sumA][sumB][idx];
+    if (cache[idx - 1][diffBefore + total] == MN) {
+      return;
     }
 
-    int ret = solve(idx + 1, sumA, sumB);
-    ret = Math.max(ret, solve(idx + 1, sumA + arr[idx], sumB));
-    ret = Math.max(ret, solve(idx + 1, sumA, sumB + arr[idx]));
-
-    return cache[sumA][sumB][idx] = ret;
+    cache[idx][diff + total] = Math.max(
+        cache[idx][diff + total],
+        cache[idx - 1][diffBefore + total] + num);
   }
+
 
 }
