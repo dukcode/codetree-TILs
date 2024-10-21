@@ -39,8 +39,8 @@ public class Main {
       b[i] = Integer.parseInt(st.nextToken());
     }
 
-    cache = new int[n + 1][n + 1];
-    for (int y = 0; y <= n; y++) {
+    cache = new int[n][n];
+    for (int y = 0; y < n; y++) {
       Arrays.fill(cache[y], -1);
     }
 
@@ -65,8 +65,8 @@ public class Main {
       return 0;
     }
 
-    if (cache[aIdx + 1][bIdx + 1] != -1) {
-      return cache[aIdx + 1][bIdx + 1];
+    if (cache[aIdx][bIdx] != -1) {
+      return cache[aIdx][bIdx];
     }
 
     int ret = solve(aIdx + 1, bIdx + 1);
