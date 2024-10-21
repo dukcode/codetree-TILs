@@ -20,7 +20,7 @@ public class Main {
   private static int[] t;
   private static int totalTime;
 
-  private static int[][] cache;
+  private static int[] cache;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -40,25 +40,21 @@ public class Main {
       totalTime += t[i];
     }
 
-    cache = new int[n + 1][totalTime + 1];
-    for (int y = 0; y <= n; ++y) {
-      Arrays.fill(cache[y], MN);
-    }
-    cache[0][0] = 0;
+    cache = new int[totalTime + 1];
+    Arrays.fill(cache, MN);
+    cache[0] = 0;
 
     for (int idx = 1; idx <= n; ++idx) {
-      for (int time = 0; time <= totalTime; ++time) {
-        if (time - t[idx] >= 0) {
-          cache[idx][time] = Math.max(cache[idx][time], cache[idx - 1][time - t[idx]] + e[idx]);
+      for (int time = totalTime; time >= 0; --time) {
+        if (time - t[idx] >= 0 && cache[time-t[idx]] >= 0) {
+          cache[time] = Math.max(cache[time], cache[time - t[idx]] + e[idx]);
         }
-
-        cache[idx][time] = Math.max(cache[idx][time], cache[idx - 1][time]);
       }
     }
 
     int ans = -1;
     for (int t = 0; t <= totalTime; ++t) {
-      if (cache[n][t] >= m) {
+      if (cache[t] >= m) {
         ans = t;
         break;
       }
