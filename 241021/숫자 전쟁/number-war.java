@@ -45,13 +45,7 @@ public class Main {
     }
 
     bw.write(String.valueOf(solve()));
-    for (int y = 0; y < n; ++y) {
-      for (int x = 0; x < n; ++x) {
-        System.out.printf("%d ", cache[y][x]);
-      }
-      System.out.println();
-    }
-    System.out.println();
+
     br.close();
     bw.close();
   }
