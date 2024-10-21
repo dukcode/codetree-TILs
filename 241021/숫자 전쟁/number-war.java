@@ -45,16 +45,23 @@ public class Main {
     }
 
     bw.write(String.valueOf(solve()));
-
+    for (int y = 0; y < n; ++y) {
+      for (int x = 0; x < n; ++x) {
+        System.out.printf("%d ", cache[y][x]);
+      }
+      System.out.println();
+    }
+    System.out.println();
     br.close();
     bw.close();
   }
 
   private static int solve() {
+    solve(0, 0);
     int ret = -1;
     for (int i = 0; i < n; i++) {
-      ret = Math.max(ret, solve(i, 0));
-      ret = Math.max(ret, solve(0, i));
+      ret = Math.max(ret, cache[i][0] == -1 ? ret : cache[i][0]);
+      ret = Math.max(ret, cache[0][i] == -1 ? ret : cache[0][i]);
     }
 
     return ret;
