@@ -31,12 +31,12 @@ public class Main {
       coins[i] = Integer.parseInt(st.nextToken());
     }
 
-    cache = new int[n + 1][4];
-    for (int y = 0; y <= n; ++y) {
+    cache = new int[n][4];
+    for (int y = 0; y < n; ++y) {
       Arrays.fill(cache[y], -1);
     }
 
-    int ans = solve(n, 3);
+    int ans = solve(n - 1, 3);
     bw.write(String.valueOf(ans < 0 ? -1 : ans));
 
     br.close();
@@ -61,9 +61,8 @@ public class Main {
     }
 
     int ret = MN;
-    int toAdd = idx == n ? 0 : coins[idx];
-    ret = Math.max(ret, solve(idx - 1, remain - 1) + toAdd);
-    ret = Math.max(ret, solve(idx - 2, remain) + toAdd);
+    ret = Math.max(ret, solve(idx - 1, remain - 1) + coins[idx]);
+    ret = Math.max(ret, solve(idx - 2, remain) + coins[idx]);
 
     return cache[idx][remain] = ret;
   }
