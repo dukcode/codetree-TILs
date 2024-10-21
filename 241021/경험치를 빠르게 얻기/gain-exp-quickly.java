@@ -9,7 +9,6 @@ import java.util.StringTokenizer;
 public class Main {
 
   private static final int MN = -987_654_321;
-  private static final int MX = 1_000_000;
 
   private static BufferedReader br;
   private static BufferedWriter bw;
@@ -41,14 +40,14 @@ public class Main {
       totalTime += t[i];
     }
 
-    cache = new int[n + 1][MX + 1];
+    cache = new int[n + 1][totalTime + 1];
     for (int y = 0; y <= n; ++y) {
       Arrays.fill(cache[y], MN);
     }
     cache[0][0] = 0;
 
     for (int idx = 1; idx <= n; ++idx) {
-      for (int time = 0; time <= MX; ++time) {
+      for (int time = 0; time <= totalTime; ++time) {
         if (time - t[idx] >= 0) {
           cache[idx][time] = Math.max(cache[idx][time], cache[idx - 1][time - t[idx]] + e[idx]);
         }
