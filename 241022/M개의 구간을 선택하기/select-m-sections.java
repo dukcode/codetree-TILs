@@ -48,16 +48,20 @@ public class Main {
 
     bw.write(String.valueOf(ans));
 
+    for (int i = 0; i < n; ++i) {
+      System.out.println(Arrays.toString(cache[i]));
+    }
+
     br.close();
     bw.close();
   }
 
   private static int solve(int idx, int cnt) {
-    if (idx == -1) {
-      return cnt == 0 || cnt == 1 ? 0 : MN;
-    }
+    if (idx == -1 || cnt == 0) {
+      if (idx == -1 && cnt == 0) {
+        return 0;
+      }
 
-    if ((idx + 2) / 2 < cnt) {
       return MN;
     }
 
