@@ -47,11 +47,6 @@ public class Main {
     }
 
     bw.write(String.valueOf(ans));
-
-    for (int i = 0; i < n; ++i) {
-      System.out.println(Arrays.toString(cache[i]));
-    }
-
     br.close();
     bw.close();
   }
