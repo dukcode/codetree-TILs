@@ -51,11 +51,8 @@ public class Main {
     }
 
     if (idx == 0) {
-      if (res == 0) {
-        return 2;
-      }
       if (Math.abs(res) == arr[idx]) {
-        return 1;
+        return arr[idx] == 0 ? 2 : 1;
       }
 
       return 0;
