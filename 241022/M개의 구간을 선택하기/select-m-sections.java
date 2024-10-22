@@ -66,7 +66,7 @@ public class Main {
     }
 
     int ret = solve(idx - 1, cnt) + arr[idx];
-    for (int i = 0; i < idx - 1; ++i) {
+    for (int i = -1; i < idx - 1; ++i) {
       ret = Math.max(ret, solve(i, cnt - 1) + arr[idx]);
     }
 
