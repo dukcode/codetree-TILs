@@ -27,6 +27,7 @@ public class Main {
     for (char c : word) {
       if (freq.get(c) == 1) {
         ans = String.valueOf(c);
+        break;
       }
     }
 
