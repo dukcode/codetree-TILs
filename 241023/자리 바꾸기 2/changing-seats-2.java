@@ -35,8 +35,8 @@ public class Main {
       record[i].add(i);
     }
 
-    a = new int[n];
-    b = new int[n];
+    a = new int[k];
+    b = new int[k];
     for (int i = 0; i < k; i++) {
       st = new StringTokenizer(br.readLine());
       a[i] = Integer.parseInt(st.nextToken()) - 1;
