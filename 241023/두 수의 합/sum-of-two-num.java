@@ -38,6 +38,12 @@ public class Main {
     int ans = 0;
     for (Integer key : keys) {
       int counter = k - key;
+      
+      if (key == counter) {
+        ans += map.get(key) * (map.get(key) - 1);
+        continue;
+      }
+      
       ans += map.get(key) * map.getOrDefault(counter, 0);
     }
 
