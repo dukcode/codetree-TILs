@@ -4,16 +4,16 @@
 24년 10월 23일 목표(140px)를 달성했어요🥳.
 
 ![690xp](https://img.shields.io/badge/EXP-690xp-%235cb85c.svg?for-the-badge)
-![3일째](https://img.shields.io/badge/연속학습-3일째-%23E34F26.svg?for-the-badge)
+![0일째](https://img.shields.io/badge/연속학습-0일째-%23E34F26.svg?for-the-badge)
 
 |총 문제수|획득 경험치|연속 학습|
 |---:|---:|---|
-21|690xp|3일째🔥|
+21|690xp|0일째❄️|
 
 |교재|이름|난이도|상태|최근 제출 코드|
 |---|---|:---:|:---:|---|
 |[Intermediate Mid / 중급 자료구조 / HashMap](https://www.codetree.ai/missions?missionId=8)|[[개념]hashmap 기본](https://www.codetree.ai/missions/8/problems/hashmap-basic)|![쉬움][easy]|![Passed][passed]|[링크](https://github.com/dukcode/codetree-TILs/blob/main/241023/hashmap%20%EA%B8%B0%EB%B3%B8/hashmap-basic.java)|
-|[Intermediate Mid / 중급 자료구조 / HashMap](https://www.codetree.ai/missions?missionId=8)|[[개념]가장 많은 데이터](https://www.codetree.ai/missions/8/problems/most-data)|![쉬움][easy]|![Passed][passed]|[링크](https://github.com/dukcode/codetree-TILs/blob/main/241023/%EA%B0%80%EC%9E%A5%20%EB%A7%8E%EC%9D%80%20%EB%8D%B0%EC%9D%B4%ED%84%B0/most-frequent-data.java)|
+|[Intermediate Mid / 중급 자료구조 / HashMap](https://www.codetree.ai/missions?missionId=8)|[[개념]가장 많은 데이터](https://www.codetree.ai/missions/8/problems/most-frequent-data)|![쉬움][easy]|![Passed][passed]|[링크](https://github.com/dukcode/codetree-TILs/blob/main/241023/%EA%B0%80%EC%9E%A5%20%EB%A7%8E%EC%9D%80%20%EB%8D%B0%EC%9D%B4%ED%84%B0/most-frequent-data.java)|
 |[Intermediate Mid / 중급 자료구조 / HashMap](https://www.codetree.ai/missions?missionId=8)|[[연습]대응되는 수와 문자](https://www.codetree.ai/missions/8/problems/corresponding-numbers-and-characters)|![쉬움][easy]|![Passed][passed]|[링크](https://github.com/dukcode/codetree-TILs/blob/main/241023/%EB%8C%80%EC%9D%91%EB%90%98%EB%8A%94%20%EC%88%98%EC%99%80%20%EB%AC%B8%EC%9E%90/corresponding-numbers-and-characters.java)|
 |[Intermediate Mid / 중급 자료구조 / HashMap](https://www.codetree.ai/missions?missionId=8)|[[연습]두 수의 합](https://www.codetree.ai/missions/8/problems/sum-of-two-num)|![보통][medium]|![Passed][passed]|[링크](https://github.com/dukcode/codetree-TILs/blob/main/241023/%EB%91%90%20%EC%88%98%EC%9D%98%20%ED%95%A9/sum-of-two-num.java)|
 |[Intermediate Mid / 중급 자료구조 / HashMap](https://www.codetree.ai/missions?missionId=8)|[[연습]세 수의 합](https://www.codetree.ai/missions/8/problems/sum-of-three-num)|![보통][medium]|![Passed][passed]|[링크](https://github.com/dukcode/codetree-TILs/blob/main/241023/%EC%84%B8%20%EC%88%98%EC%9D%98%20%ED%95%A9/sum-of-three-num.java)|
