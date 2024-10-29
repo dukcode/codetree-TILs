@@ -18,6 +18,7 @@ public class Main {
 
   private static int[] parent;
   private static int[] height;
+  private static int[] size;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,19 +31,22 @@ public class Main {
     parent = IntStream.range(0, n).toArray();
     height = new int[n];
     Arrays.fill(height, 1);
+    size = new int[n];
+    Arrays.fill(size, 1);
 
     for (int i = 0; i < m; i++) {
       st = new StringTokenizer(br.readLine());
       String command = st.nextToken();
-      int a = Integer.parseInt(st.nextToken()) - 1;
 
       switch (command) {
         case "x":
+          int a = Integer.parseInt(st.nextToken()) - 1;
           int b = Integer.parseInt(st.nextToken()) - 1;
           union(a, b);
           break;
         case "y":
-          bw.write(String.valueOf(count(a)));
+          int x = Integer.parseInt(st.nextToken()) - 1;
+          bw.write(String.valueOf(size[findRoot(x)]));
           bw.newLine();
         default:
           break;
@@ -54,32 +58,22 @@ public class Main {
 
   }
 
-  private static int count(int x) {
-    int cnt = 0;
-
-    int root = findRoot(x);
-    for (int i = 0; i < n; i++) {
-      if (root == findRoot(i)) {
-        cnt++;
-      }
-    }
-
-    return cnt;
-  }
-
   private static void union(int a, int b) {
     int rootA = findRoot(a);
     int rootB = findRoot(b);
 
     if (height[rootA] > height[rootB]) {
       parent[rootB] = rootA;
+      size[rootA] += size[rootB];
       return;
     } else if (height[rootA] < height[rootB]) {
       parent[rootA] = rootB;
+      size[rootB] += size[rootA];
       return;
     }
 
     parent[rootA] = rootB;
+    size[rootB] += size[rootA];
     height[rootB]++;
   }
 
