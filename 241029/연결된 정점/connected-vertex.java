@@ -62,6 +62,10 @@ public class Main {
     int rootA = findRoot(a);
     int rootB = findRoot(b);
 
+    if (rootA == rootB) {
+      return;
+    }
+
     if (height[rootA] > height[rootB]) {
       parent[rootB] = rootA;
       size[rootA] += size[rootB];
@@ -82,9 +86,7 @@ public class Main {
       return x;
     }
 
-    int rootX = findRoot(parent[x]);
-    parent[x] = rootX;
-    return rootX;
+    return parent[x] = findRoot(parent[x]);
   }
 
 }
