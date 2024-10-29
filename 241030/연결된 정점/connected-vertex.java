@@ -48,7 +48,7 @@ public class Main {
         case "y":
           int x = Integer.parseInt(st.nextToken()) - 1;
           sb.append(size[findRoot(x)]);
-          sb.append("/n");
+          sb.append("\n");
         default:
           break;
       }
