@@ -3,8 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.stream.IntStream;
 
@@ -45,12 +43,7 @@ public class Main {
       union(a, b);
     }
 
-    Set<Integer> roots = new HashSet<>();
-    for (int i = 0; i < n; i++) {
-      roots.add(findRoot(i));
-    }
-
-    ans += roots.size() - 1;
+    ans += (n - 1) - m;
 
     bw.write(String.valueOf(ans));
 
