@@ -3,8 +3,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.IntStream;
 
@@ -52,33 +54,33 @@ public class Main {
     b = Integer.parseInt(st.nextToken()) - 1;
     k = Integer.parseInt(st.nextToken());
 
-    PriorityQueue<Size> pq = new PriorityQueue<>((s1, s2) -> (s2.size - s1.size));
-    for (int i = 0; i < n; ++i) {
-      int root = findRoot(i);
-      pq.offer(new Size(root, size[root]));
-    }
-
-    int rootB = findRoot(b);
-    int cnt = 0;
-    while (!pq.isEmpty()) {
-      int i = pq.poll().idx;
-      if (cnt > k) {
-        continue;
-      }
-      int rootI = findRoot(i);
-      if (rootI == rootB) {
-        continue;
-      }
-
-      if (rootI != findRoot(a)) {
-        union(rootI, a);
-        cnt++;
-      }
-    }
-
     int rootA = findRoot(a);
+    int rootB = findRoot(b);
 
-    bw.write(String.valueOf(size[rootA]));
+    List<Integer> sizes = new ArrayList<>();
+    boolean[] vis = new boolean[n];
+    for (int i = 0; i < n; ++i) {
+      int rootI = findRoot(i);
+
+      if (rootI == rootA || rootI == rootB) {
+        continue;
+      }
+
+      if (vis[rootI]) {
+        continue;
+      }
+
+      sizes.add(size[rootI]);
+      vis[rootI] = true;
+    }
+
+    sizes.sort(Collections.reverseOrder());
+    int ans = size[rootA];
+    for (int i = 0; i < Math.min(k, sizes.size()); ++i) {
+      ans += sizes.get(i);
+    }
+
+    bw.write(String.valueOf(ans));
 
     br.close();
     bw.close();
