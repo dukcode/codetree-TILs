@@ -45,7 +45,7 @@ public class Main {
       union(rootA, rootB);
     }
 
-    bw.write(String.valueOf(ans));
+    bw.write(ans == -1 ? "happy" : String.valueOf(ans));
 
     br.close();
     bw.close();
