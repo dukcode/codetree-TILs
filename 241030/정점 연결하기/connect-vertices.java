@@ -21,6 +21,7 @@ public class Main {
   private static int n;
 
   private static int[] parent;
+  private static int[] height;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,7 +29,7 @@ public class Main {
 
     n = Integer.parseInt(br.readLine());
     parent = IntStream.range(0, n).toArray();
-
+    height = new int[n];
     for (int i = 0; i < n - 2; i++) {
       st = new StringTokenizer(br.readLine());
       int a = Integer.parseInt(st.nextToken()) - 1;
@@ -42,8 +43,17 @@ public class Main {
       unlinked.add(findRoot(i));
     }
 
-    List<Integer> ans = unlinked.stream().sorted().collect(Collectors.toList());
-    Collections.sort(ans);
+    List<Integer> ans = new ArrayList<>();
+    Loop:
+    for (int i = 0; i < n; i++) {
+      for (int j = i + 1; j < n; j++) {
+        if (findRoot(i) != findRoot(j)) {
+          ans.add(i);
+          ans.add(j);
+          break Loop;
+        }
+      }
+    }
 
     bw.write(String.valueOf(ans.get(0) + 1));
     bw.write(' ');
@@ -69,12 +79,16 @@ public class Main {
       return;
     }
 
-    if (rootA > rootB) {
-      union(rootB, rootA);
+    if (height[rootA] > height[rootB]) {
+      parent[rootB] = rootA;
+      return;
+    } else if (height[rootB] > height[rootA]) {
+      parent[rootA] = rootB;
       return;
     }
 
     parent[rootB] = rootA;
+    height[rootA]++;
   }
 
 
