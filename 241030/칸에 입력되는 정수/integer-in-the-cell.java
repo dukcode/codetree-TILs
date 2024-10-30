@@ -26,7 +26,7 @@ public class Main {
 
     parent = IntStream.rangeClosed(0, n).toArray();
 
-    int ans = 0;
+    int ans = m;
     for (int i = 1; i <= m; i++) {
       int x = Integer.parseInt(br.readLine());
 
