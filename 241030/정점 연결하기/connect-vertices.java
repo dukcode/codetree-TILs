@@ -4,12 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -36,11 +32,6 @@ public class Main {
       int b = Integer.parseInt(st.nextToken()) - 1;
 
       union(a, b);
-    }
-
-    Set<Integer> unlinked = new HashSet<>();
-    for (int i = 0; i < n; i++) {
-      unlinked.add(findRoot(i));
     }
 
     List<Integer> ans = new ArrayList<>();
