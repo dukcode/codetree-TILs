@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 import java.util.stream.IntStream;
 
@@ -51,9 +52,16 @@ public class Main {
     b = Integer.parseInt(st.nextToken()) - 1;
     k = Integer.parseInt(st.nextToken());
 
+    PriorityQueue<Size> pq = new PriorityQueue<>((s1, s2) -> (s2.size - s1.size));
+    for (int i = 0; i < n; ++i) {
+      int root = findRoot(i);
+      pq.offer(new Size(root, size[root]));
+    }
+
     int rootB = findRoot(b);
     int cnt = 0;
-    for (int i = 0; i < n; ++i) {
+    while (!pq.isEmpty()) {
+      int i = pq.poll().idx;
       if (cnt > k) {
         continue;
       }
