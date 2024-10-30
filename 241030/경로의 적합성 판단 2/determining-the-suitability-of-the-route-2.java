@@ -50,7 +50,6 @@ public class Main {
         ok = false;
         break;
       }
-      before = now;
     }
 
     bw.write(String.valueOf(ok ? 1 : 0));
