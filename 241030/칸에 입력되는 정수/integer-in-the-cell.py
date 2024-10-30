@@ -42,6 +42,6 @@ for i in range(1, m + 1):
         break
 
     # X번보다 작은 위치 중에 값이 들어갈 수 있는 최대 위치로 이동합니다.
-    union(x, x - 1)
+    union(X, X - 1)
 
 print(ans)
