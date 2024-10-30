@@ -29,22 +29,23 @@ public class Main {
     parent = IntStream.range(0, n).toArray();
     height = new int[n];
 
-    int ans = 0;
+    int cntCut = 0;
     for (int i = 0; i < m; i++) {
       st = new StringTokenizer(br.readLine());
       int a = Integer.parseInt(st.nextToken()) - 1;
       int b = Integer.parseInt(st.nextToken()) - 1;
 
       if (isCycle(a, b)) {
-        ans++;
+        cntCut++;
         continue;
       }
 
       union(a, b);
     }
 
-    ans += (n - 1) - m;
+    int cntAdd = (n - 1) - (m - cntCut);
 
+    int ans = cntCut + cntAdd;
     bw.write(String.valueOf(ans));
 
     br.close();
