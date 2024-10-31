@@ -71,7 +71,7 @@ public class Main {
         int idx = c - 'a';
 
         if (cur.children[idx] == null) {
-          continue;
+          break;
         }
         cur = cur.children[idx];
         counts[i] = cur.cnt;
