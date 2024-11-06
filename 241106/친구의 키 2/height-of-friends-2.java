@@ -3,11 +3,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -19,7 +18,8 @@ public class Main {
   private static int n;
   private static int m;
 
-  private static Set<Integer>[] adj;
+  private static List<Integer>[] adj;
+  private static int[] inDegrees;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,17 +29,19 @@ public class Main {
     n = Integer.parseInt(st.nextToken());
     m = Integer.parseInt(st.nextToken());
 
-    adj = new Set[n];
+    adj = new List[n];
     for (int i = 0; i < n; i++) {
-      adj[i] = new HashSet();
+      adj[i] = new ArrayList<>();
     }
 
+    inDegrees = new int[n];
     for (int i = 0; i < m; ++i) {
       st = new StringTokenizer(br.readLine());
       int a = Integer.parseInt(st.nextToken()) - 1;
       int b = Integer.parseInt(st.nextToken()) - 1;
 
       adj[a].add(b);
+      inDegrees[b]++;
     }
 
     bw.write(solve() ? "Consistent" : "Inconsistent");
@@ -49,45 +51,43 @@ public class Main {
   }
 
   private static boolean solve() {
-    boolean[] vis = new boolean[n];
-    return dfsAll(vis);
-  }
-
-  private static boolean dfsAll(boolean[] vis) {
-    List<Integer> order = new ArrayList<>();
-    for (int i = 0; i < n; ++i) {
-      if (vis[i]) {
-        continue;
+    Queue<Integer> q = new ArrayDeque<>();
+    boolean[] visited = new boolean[n];
+    for (int i = 0; i < n; i++) {
+      if (inDegrees[i] == 0) {
+        q.offer(i);
+        visited[i] = true;
       }
-
-      dfs(i, vis, order);
     }
 
-    Collections.reverse(order);
+    List<Integer> order = new ArrayList<>();
+    while (!q.isEmpty()) {
+      order.add(q.poll());
+      int here = q.poll();
+      for (int there : adj[here]) {
+        if (visited[there]) {
+          continue;
+        }
 
-    for (int i = 0; i < n; ++i) {
-      for (int j = i + 1; j < n; ++j) {
-        if (adj[order.get(j)].contains(order.get(i))) {
-          return false;
+        inDegrees[there]--;
+        if (inDegrees[there] == 0) {
+          visited[there] = true;
+          q.offer(there);
         }
       }
     }
 
-    return true;
-  }
-
-  private static void dfs(int here, boolean[] vis, List<Integer> order) {
-    vis[here] = true;
-
-    for (int there : adj[here]) {
-      if (vis[there]) {
-        continue;
-      }
-
-      dfs(there, vis, order);
+    if (order.size() != n) {
+      return false;
     }
 
-    order.add(here);
+    for (int i = 0; i < n; i++) {
+      if (inDegrees[i] != 0) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
 }
