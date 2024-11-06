@@ -62,7 +62,7 @@ public class Main {
 
     List<Integer> order = new ArrayList<>();
     while (!q.isEmpty()) {
-      order.add(q.poll());
+      order.add(q.peek());
       int here = q.poll();
       for (int there : adj[here]) {
         if (visited[there]) {
