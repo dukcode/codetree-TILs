@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -16,7 +19,7 @@ public class Main {
   private static int n;
   private static int m;
 
-  private static boolean[][] adj;
+  private static Set<Integer>[] adj;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,13 +29,17 @@ public class Main {
     n = Integer.parseInt(st.nextToken());
     m = Integer.parseInt(st.nextToken());
 
-    adj = new boolean[n][n];
+    adj = new Set[n];
+    for (int i = 0; i < n; i++) {
+      adj[i] = new HashSet();
+    }
+
     for (int i = 0; i < m; ++i) {
       st = new StringTokenizer(br.readLine());
       int a = Integer.parseInt(st.nextToken()) - 1;
       int b = Integer.parseInt(st.nextToken()) - 1;
 
-      adj[a][b] = true;
+      adj[a].add(b);
     }
 
     bw.write(solve() ? "Consistent" : "Inconsistent");
@@ -56,9 +63,11 @@ public class Main {
       dfs(i, vis, order);
     }
 
+    Collections.reverse(order);
+
     for (int i = 0; i < n; ++i) {
       for (int j = i + 1; j < n; ++j) {
-        if (adj[order.get(i)][order.get(j)]) {
+        if (adj[order.get(j)].contains(order.get(i))) {
           return false;
         }
       }
@@ -70,8 +79,8 @@ public class Main {
   private static void dfs(int here, boolean[] vis, List<Integer> order) {
     vis[here] = true;
 
-    for (int there = 0; there < n; ++there) {
-      if (vis[there] || !adj[here][there]) {
+    for (int there : adj[here]) {
+      if (vis[there]) {
         continue;
       }
 
