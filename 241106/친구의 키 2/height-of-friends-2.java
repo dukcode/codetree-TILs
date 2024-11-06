@@ -52,11 +52,9 @@ public class Main {
 
   private static boolean solve() {
     Queue<Integer> q = new ArrayDeque<>();
-    boolean[] visited = new boolean[n];
     for (int i = 0; i < n; i++) {
       if (inDegrees[i] == 0) {
         q.offer(i);
-        visited[i] = true;
       }
     }
 
@@ -65,13 +63,8 @@ public class Main {
       order.add(q.peek());
       int here = q.poll();
       for (int there : adj[here]) {
-        if (visited[there]) {
-          continue;
-        }
-
         inDegrees[there]--;
         if (inDegrees[there] == 0) {
-          visited[there] = true;
           q.offer(there);
         }
       }
