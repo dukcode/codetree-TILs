@@ -16,7 +16,7 @@ public class Main {
   private static StringTokenizer st;
 
   private static int n;
-  private static int[] adj;
+  private static List<Integer>[] adj;
   private static int[] inDegrees;
 
   public static void main(String[] args) throws IOException {
@@ -25,7 +25,10 @@ public class Main {
 
     n = Integer.parseInt(br.readLine());
 
-    adj = new int[n];
+    adj = new List[n];
+    for (int i = 0; i < n; i++) {
+      adj[i] = new ArrayList<>();
+    }
     inDegrees = new int[n];
 
     st = new StringTokenizer(br.readLine());
@@ -33,10 +36,10 @@ public class Main {
       String op = st.nextToken();
 
       if (op.equals("<")) {
-        adj[i] = i + 1;
+        adj[i].add(i + 1);
         inDegrees[i + 1]++;
       } else {
-        adj[i + 1] = i;
+        adj[i + 1].add(i);
         inDegrees[i]++;
       }
     }
@@ -72,18 +75,20 @@ public class Main {
     while (!pq.isEmpty()) {
       int here = pq.poll();
       order.add(here);
-      int there = adj[here];
-      inDegree[there]--;
-      if (inDegree[there] == 0) {
-        pq.offer(there);
+      for (int there : adj[here]) {
+        inDegree[there]--;
+        if (inDegree[there] == 0) {
+          pq.offer(there);
+        }
       }
     }
 
-    int[] ans1 = new int[n];
+    int[] ret = new int[n];
     for (int i = 0; i < n; i++) {
-      ans1[order.get(i)] = i + 1;
+      ret[order.get(i)] = i + 1;
     }
-    return ans1;
+
+    return ret;
   }
 
 
